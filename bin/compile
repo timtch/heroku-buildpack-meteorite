@@ -131,6 +131,13 @@ HOME="$VENDORED_METEOR" "$VENDORED_METEOR"/.meteor/meteor bundle "$CACHE_DIR"/bu
 mkdir -p "$METEOR_BUILD_DIR"/app
 tar -zxf "$CACHE_DIR"/bundle.tar.gz --strip-components 1 -C "$METEOR_BUILD_DIR"/app
 rm "$CACHE_DIR"/bundle.tar.gz
+
+#Rewrite client code with local bundled version
+JS_NAME="$METEOR_BUILD_DIR"/app/programs/client/*.js
+CSS_NAME="$METEOR_BUILD_DIR"/app/programs/client/*.css
+mv "$METEOR_BUILD_DIR"/app/uploadjs $(basename $JS_NAME)
+mv "$METEOR_BUILD_DIR"/app/uploadcss $(basename $CSS_NAME)
+
 ############################################
 
 ############################################
