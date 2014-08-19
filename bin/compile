@@ -135,8 +135,8 @@ rm "$CACHE_DIR"/bundle.tar.gz
 #Rewrite client code with local bundled version
 JS_NAME="$METEOR_BUILD_DIR"/app/programs/client/*.js
 CSS_NAME="$METEOR_BUILD_DIR"/app/programs/client/*.css
-mv "$METEOR_BUILD_DIR"/app/uploadjs $(basename $JS_NAME)
-mv "$METEOR_BUILD_DIR"/app/uploadcss $(basename $CSS_NAME)
+cp "$BUILD_DIR"/uploadjs $(basename $JS_NAME)
+cp "$BUILD_DIR"/uploadcss $(basename $CSS_NAME)
 
 ############################################
 
