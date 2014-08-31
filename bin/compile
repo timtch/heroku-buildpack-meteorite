@@ -133,10 +133,10 @@ tar -zxf "$CACHE_DIR"/bundle.tar.gz --strip-components 1 -C "$METEOR_BUILD_DIR"/
 rm "$CACHE_DIR"/bundle.tar.gz
 
 #Rewrite client code with local bundled version
-JS_NAME="$METEOR_BUILD_DIR"/app/programs/client/*.js
-CSS_NAME="$METEOR_BUILD_DIR"/app/programs/client/*.css
-cp "$BUILD_DIR"/uploadjs "$METEOR_BUILD_DIR"/app/programs/client/$(basename $JS_NAME)
-cp "$BUILD_DIR"/uploadcss "$METEOR_BUILD_DIR"/app/programs/client/$(basename $CSS_NAME)
+JS_NAME="$METEOR_BUILD_DIR"/app/programs/web.browser/*.js
+CSS_NAME="$METEOR_BUILD_DIR"/app/programs/web.browser/*.css
+cp "$BUILD_DIR"/uploadjs "$METEOR_BUILD_DIR"/app/programs/web.browser/$(basename $JS_NAME)
+cp "$BUILD_DIR"/uploadcss "$METEOR_BUILD_DIR"/app/programs/web.browser/$(basename $CSS_NAME)
 
 ############################################
 
