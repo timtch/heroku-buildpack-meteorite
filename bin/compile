@@ -5,7 +5,7 @@
 set -e
 
 # debug
-# set -x
+set -x
 
 # clean up leaking environment
 unset GIT_DIR
@@ -150,6 +150,13 @@ cat > "$BUILD_DIR"/.profile.d/mongo.sh <<EOF
 
   export MONGO_URL=\${MONGO_URL:-\$MONGOHQ_URL};
 EOF
+
+##install npm packages
+echo "-----> Installing npm packages"
+
+run_npm "prune" "$METEOR_BUILD_DIR/app/programs/server" | indent
+run_npm "uninstall fibers" "$METEOR_BUILD_DIR/app/programs/server" | indent
+run_npm "install" "$METEOR_BUILD_DIR/app/programs/server" | indent
 
 # vendor node into the slug
 PATH="$METEOR_BUILD_DIR/bin:$PATH"
