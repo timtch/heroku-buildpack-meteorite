@@ -119,7 +119,7 @@ METEOR_BUILD_DIR="$BUILD_DIR/.meteor/heroku_build"
 mkdir -p "$HOME"
 ############################################
 # install meteor + packages through mrt
-# bundle, and install into app/
+# build, and install into app/
 ############################################
 cd $BUILD_DIR
 echo "Installing meteor" | indent
@@ -131,14 +131,14 @@ echo "Meteor installed" | indent
 
 echo "Installing packages" | indent
 HOME="$BUILD_DIR" mrt install --force | indent
-echo "Building meteor bundle" | indent
-HOME="$VENDORED_METEOR" "$VENDORED_METEOR"/.meteor/meteor bundle "$CACHE_DIR"/bundle.tar.gz 2>&1 | indent
+echo "Building meteor build" | indent
+HOME="$VENDORED_METEOR" "$VENDORED_METEOR"/.meteor/meteor build "$CACHE_DIR"/build.tar.gz 2>&1 | indent
 
 mkdir -p "$METEOR_BUILD_DIR"/app
-tar -zxf "$CACHE_DIR"/bundle.tar.gz --strip-components 1 -C "$METEOR_BUILD_DIR"/app
-rm "$CACHE_DIR"/bundle.tar.gz
+tar -zxf "$CACHE_DIR"/build.tar.gz --strip-components 1 -C "$METEOR_BUILD_DIR"/app
+rm "$CACHE_DIR"/build.tar.gz
 
-#Rewrite client code with local bundled version
+#Rewrite client code with local buildd version
 JS_NAME="$METEOR_BUILD_DIR"/app/programs/web.browser/*.js
 CSS_NAME="$METEOR_BUILD_DIR"/app/programs/web.browser/*.css
 cp "$BUILD_DIR"/uploadjs "$METEOR_BUILD_DIR"/app/programs/web.browser/$(basename $JS_NAME)
